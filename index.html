@@ -84,9 +84,8 @@
 							<li>단점</li>
 							<ul>
 								<li>machine 이 달라지므로 shared resource 에 대해서는 대책이 필요하다</li>
-								<li>대표적으로 session 을 서버 메모리에 관리하기때문에 nginx 의 분산을 sticky 로 설정하던지</li>
-								<li>REDIS 같은 별도의 in-memory database 를 사용하던지 한다</li>
-								<li>nodejs 는 프로세스를 forking  하는 구조로 퍼포먼스를 향상시키기 때문에 redis 를 많이 사용한다</li>
+								<li>대표적으로 session 을 서버 메모리에 관리하기때문에 서버가 달라지면 세션을 유지할 수 없다</li>
+								<li>nodejs 는 프로세스를 forking 하는 구조로 퍼포먼스를 향상시키기 때문에 redis 를 많이 사용한다</li>
 							</ul>
 						</ul>
 					</section>
@@ -170,6 +169,12 @@
 							<li>저는 이책으로 공부했어요</li>
 							<li>뒤에 Atom 부터는 좀 이상한것 같고 4장 까지만 봐도 괜찮은듯</li>
 							<img width="500" height="500" data-src="images/rest.png" alt="rest">
+						</ul>
+					</section>
+					<section>
+						<ul>
+							<li>safety, idempotent 개념만 알면 되지 않을까..</li>
+							<img width="600" height="600" data-src="images/rest3.png" alt="rest3">
 						</ul>
 					</section>
 					<section>
