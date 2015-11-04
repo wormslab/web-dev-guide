@@ -177,11 +177,6 @@
 							<img width="600" height="600" data-src="images/rest3.png" alt="rest3">
 						</ul>
 					</section>
-					<section>
-						<ul>
-							<li></li>
-						</ul>
-					</section>
 				</section>
 				<section>
 					<section>
@@ -263,7 +258,7 @@
 						<ul>
 							<li>배포는 서버사이드의 일이므로 각 플랫폼에 맞에 알아서 잘…</li>
 							<li>javascript/css/image 크기가 크면 response time 이 떨어지므로</li>
-							<li>concatify, uglify, gridify 등 static 파일크기를 줄이거</li>
+							<li>concatify, uglify, image sprite 등 static 파일크기를 줄이거</li>
 							<li>http connection을 최소화 하는 단계가 필요하다</li>
 							<li>(LE|SA|SC)SS 빌드도 필요함</li>
 						</ul>
@@ -274,7 +269,7 @@
 							<li>js/css/image는 static 파일이므로 nginx 가 처리하게 되는데</li>
 							<li>caching 지옥에 빠지면 고통받으니 뭔가 이상하다 싶으면 cache 를 의심하세요</li>
 							<li>만약 CloudFront 같은 CDN 서비스를 사용한다면 더욱더 지옥같을 거에요</li>
-							<li>그래서 build 된 js, css 에 pinger print 를 붙여서 다른파일로 인식되도록 하기도 합니다</li>
+							<li>그래서 build 된 js, css 에 fingerprint 를 붙여서 다른파일로 인식되도록 하기도 합니다</li>
 						</ul>
 					</section>
 					<section>
