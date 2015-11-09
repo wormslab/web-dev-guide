@@ -301,6 +301,120 @@
 						</ul>
 					</section>
 				</section>
+        <section>
+          <section>
+            <h1>ES6 - generator</h1>
+          </section>
+          <section>
+            <blockquote>"Subroutines are special cases of ... coroutines." – Donald Knuth</blockquote>
+          </section>
+          <section>
+            <ul>
+              <li>C/C++에서는 function과 subroutine이 동의어 이다</li>
+              <li>javascript에서도 function과 subtroutine이 동의어 이다</li>
+              <li>일반적으로 subroutine에게 제어권을 넘겨주며 subsoutine은 return keyword로 제어권을 다시 넘겨준다</li>
+              <li>coroutine은 entry point가 여러개 이고 돌아갈 위치를 지정할 수 있다(yield, next)</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>javascript에서는 generator function을 이용하여 coroutine을 구현 한다</li>
+              <li>main routine에서 next()를 호하여 generator function에게 제어권을 넘긴다</li>
+              <li>generator function에서는 yield 키워드를 사용하여 다시 제어권을 넘긴다</li>
+            </ul>
+            </ul>
+            <pre><code>
+function* idMaker(){
+  var index = 0;
+  while(true)
+    yield index++;
+}
+
+var gen = idMaker();
+
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+console.log(gen.next().value); // 2
+            </code></pre>
+          </section>
+          <section>
+            <pre><code>
+function *foo(x) {
+  var y = 2 * (yield (x + 1));
+  var z = yield (y / 3);
+  return (x + y + z);
+}
+
+var it = foo(5);
+            </code></pre>
+            <pre><code>
+console.log(it.next());
+console.log(it.next(12));
+console.log(it.next(13));
+            </code></pre>
+            <ul>
+              <li class=fragment>6</li>
+              <li class=fragment>8</li>
+              <li class=fragment>42</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>next() function에 parameter를 입력하면 마지막 yield값을 수정 가능</li>
+              <li>generator를 이용하여 callback 지옥에서 벗어나 asyncronous 작업들을 syncronous 작업으로 바꿀 수 있다</li>
+            </ul>
+          </section>
+          <section>
+            <h1>Asyncronous generator</h1>
+            <pre><code>
+function* generator() {
+  // 내가 하고자 하는 작업(syncronous style)
+  var a = yield promiseGen('A');
+  var b = yield promiseGen('B');
+  var c = yield promiseGen('C');
+}
+
+function promiseGen(val) {
+  return new Promise(function(resolve, reject) {
+    setTimeout(function() {
+      resolve(val);
+    }, 1000);
+  });
+}
+
+function runGen(g) {
+  var it = g(), ret;
+
+  (function iterate(val) {
+    ret = it.next(val);
+    if (!ret.done) {
+      if ("then" in ret.value) {
+        ret.value.then(function(v) {
+          iterate(v);
+        });
+      } else {
+        setTimeout(function() {
+          iterate(ret.value);
+        }, 0);
+      }
+    }
+  })();
+}
+
+runGen(generator);
+            </code></pre>
+          </section>
+          <section>
+            <h1>ES7 async</h1>
+            <pre><code>
+async function generatorToAsync() {
+  var a = await promiseGen('A');
+  var b = await promiseGen('B');
+  var c = await promiseGen('C');
+}
+            </code></pre>
+          </section>
+        </section>
 			</div>
 		</div>
 
